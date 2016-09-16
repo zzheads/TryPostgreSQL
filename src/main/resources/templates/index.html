@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+  <nav th:replace="layout :: nav"></nav>
+
+  <div class="grid-container">
+      <div th:replace="layout :: logo"></div>
+      <div th:replace="layout :: flash"></div>
+
+      <div id="hiddenPlaceToStoreSomeVars">
+          <p id="loggedUser" hidden="hidden" th:text="${user.username}"></p>
+          <p id="loggedUserRole" hidden="hidden" th:text="${user.role.name}"></p>
+          <div id="categoriesHere">
+              <div th:each="category, stat : ${allCategories}">
+                  <p th:id="@{'getCategoryNameById' + ${category.id}}" th:text="${category.name}" hidden="hidden"></p>
+                  <p th:id="@{'allCategoriesName' + ${stat.index}}" th:text="${category.name}" hidden="hidden"></p>
+                  <p th:id="@{'allCategoriesId' + ${stat.index}}" th:text="${category.id}" hidden="hidden"></p>
+              </div>
+          </div>
+          <p id="selectedCategory" hidden="hidden">1</p>
+          <p id="pattern" hidden="hidden"></p>
+          <p id="method" hidden="hidden">in Description</p>
+      </div>
+
+      <div id="root" class="grid-100">
+          <script src="../assets/vendor/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+          <script src="../assets/scripts/flashMessage.js" type="text/javascript" charset="utf-8"></script>
+          <script src="../assets/scripts/layout.js" type="text/javascript" charset="utf-8"></script>
+          <script src="../assets/scripts/recipe.js" type="text/javascript" charset="utf-8"></script>
+          <script src="../assets/scripts/index.js" type="text/javascript" charset="utf-8"></script>
+          <script>$.ready(indexPage());</script>
+      </div> <!-- grid-100 -->
+
+  </div> <!-- grid-container -->
+</body>
+<div th:replace="layout :: footer"></div>
+</html>

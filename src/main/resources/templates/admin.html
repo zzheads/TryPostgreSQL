@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="A simple recipes web application."/>
+    <title>Recipe Site / Admin panel</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans|Roboto|Ubuntu|Ubuntu+Condensed" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../assets/css/unsemantic-grid-responsive.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../assets/css/mystyles.css}"/>
+</head>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<div class="grid-container">
+
+    <div th:replace="layout :: logo"></div>
+    <div th:replace="layout :: flash"></div>
+
+    <div class="grid-100">
+        <div class="recipes">
+
+            <div class="grid-100 row controls">
+                <div class="grid-30">
+                    <p id="titleHere">
+                        <h1  id="title">Admin Panel</h1>
+                    </p>
+                </div>
+                <div class="grid-70">
+                    <div class="flush-right">
+                        <p id="buttonsHere">
+                            <a href="#"><button id="checkCategoriesButton" type="button" onclick="checkCategories()" class="secondary">Check Categories</button></a>
+                            <a href="#"><button id="checkRecipesButton" type="button" onclick="checkRecipes()" class="secondary">Check Recipes</button></a>
+                            <a href="#"><button id="checkUsersButton" type="button" onclick="checkUsers()" class="secondary">Check Users</button></a>
+                            <a href="#"><button id="addUserButton" type="button" onclick="addUser()">Add User</button></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="users" class="grid-100 row">
+                 <div th:each="user, stat : ${users}" th:id="@{'user#' +${user.id}}" class="recipes">
+                     <div class="grid-30">
+                         <p>
+                            <input th:id="@{'inputUsername#' + ${user.id}}" th:value="${user.username}"/>
+                         </p>
+                      </div>
+                     <div class="grid-30">
+                         <p>
+                            <input th:id="@{'inputPassword#' + ${user.id}}" th:value="${user.password}"/>
+                         </p>
+                     </div>
+                     <div class="grid-15">
+                         <p>
+                            <input th:id="@{'inputRole#' + ${user.id}}" th:value="${user.role.name}"/>
+                         </p>
+                     </div>
+                     <div class="grid-25">
+                         <div class="flush-right">
+                            <p>
+                                <a href="#"><button type="button" th:id="@{'buttonDelete#' + ${user.id}}" onclick="deleteUser(this.id)">Delete</button></a>
+                                <a href="#"><button type="button" th:id="@{'buttonSave#' + ${user.id}}" onclick="saveUser(this.id)">Save</button></a>
+                            </p>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+
+            <div id="bases" class="grid-100 row">
+            </div>
+
+        </div> <!-- recipes -->
+    </div> <!-- grid-100 -->
+</div> <!-- grid-container -->
+
+<script src="../assets/vendor/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../assets/scripts/flashMessage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../assets/scripts/admin.js" type="text/javascript" charset="utf-8"></script>
+</body>
+<div th:replace="layout :: footer"></div>
+</html>
