@@ -32,6 +32,8 @@ dependencies {
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
     compile 'com.google.code.gson:gson'
     compile 'org.postgresql:postgresql'
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.2.2'
+
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile("org.dbunit:dbunit:2.5.1")
